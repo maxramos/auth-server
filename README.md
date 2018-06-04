@@ -1,1 +1,1 @@
-# exam-simulator
+# auth-server
