@@ -12,7 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.User.UserBuilder;
 
-@EnableWebSecurity
+@EnableWebSecurity(debug = true)
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
