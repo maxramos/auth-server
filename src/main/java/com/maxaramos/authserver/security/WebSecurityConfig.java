@@ -43,6 +43,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 //		AuthorizationEndpoint
 //		OAuth2AuthenticationProcessingFilter
+//		OAuth2AccessDeniedHandler
 		http
 			.requestMatchers()
 				.antMatchers("/", "/login", "/oauth/authorize", "/oauth/confirm_access")
