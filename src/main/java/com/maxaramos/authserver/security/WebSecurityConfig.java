@@ -50,7 +50,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/", "/oauth/authorize", "/oauth/confirm_access").authenticated()
 				.and()
 			.formLogin()
-				.loginPage("/login").permitAll()
+				.loginPage("/login")
 				.and()
 			.csrf().disable();
 	}
