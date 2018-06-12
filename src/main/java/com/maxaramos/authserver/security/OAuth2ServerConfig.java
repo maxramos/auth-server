@@ -70,14 +70,14 @@ public class OAuth2ServerConfig {
 		@Override
 		public void configure(HttpSecurity http) throws Exception {
 			http
-				.sessionManagement()
-					.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
-					.and()
 				.requestMatchers()
 					.antMatchers("/oauth/token", "/api/**")
 					.and()
 				.authorizeRequests()
 					.antMatchers("/oauth/token", "/api/**").access("#oauth2.hasScope('read')")
+					.and()
+				.sessionManagement()
+					.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
 					.and()
 				.csrf().disable();
 		}
