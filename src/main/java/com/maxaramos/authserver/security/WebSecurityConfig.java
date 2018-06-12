@@ -2,8 +2,6 @@ package com.maxaramos.authserver.security;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
-import org.springframework.core.Ordered;
-import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -13,7 +11,6 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.User.UserBuilder;
 
 @EnableWebSecurity(debug = true)
-@Order(Ordered.HIGHEST_PRECEDENCE)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Value("${spring.security.user.name}")
@@ -42,18 +39,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 //		AuthorizationEndpoint
+//		TokenEndpoint
 //		OAuth2AuthenticationProcessingFilter
-//		OAuth2AccessDeniedHandler
 		http
 			.requestMatchers()
-				.antMatchers("/", "/login", "/oauth/authorize", "/oauth/confirm_access")
+				.antMatchers("/", "/login", "/oauth/authorize", "/oauth/confirm_access", "/oauth/error")
 				.and()
 			.authorizeRequests()
-				.antMatchers("/login").permitAll()
+				.antMatchers("/login", "/oauth/error").permitAll()
 				.antMatchers("/", "/oauth/authorize", "/oauth/confirm_access").authenticated()
 				.and()
 			.formLogin()
-				.loginPage("/login")
+				.loginPage("/login").permitAll()
 				.and()
 			.csrf().disable();
 	}

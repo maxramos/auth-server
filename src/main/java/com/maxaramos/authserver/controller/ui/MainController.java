@@ -1,4 +1,4 @@
-package com.maxaramos.authserver.controller;
+package com.maxaramos.authserver.controller.ui;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;

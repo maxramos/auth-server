@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -62,6 +64,7 @@ public class OAuth2ServerConfig {
 
 	@Configuration
 	@EnableResourceServer
+	@Order(Ordered.HIGHEST_PRECEDENCE)
 	public static class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
 		@Override
@@ -71,10 +74,10 @@ public class OAuth2ServerConfig {
 					.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
 					.and()
 				.requestMatchers()
-					.antMatchers("/me")
+					.antMatchers("/oauth/token", "/api/**")
 					.and()
 				.authorizeRequests()
-					.antMatchers("/me").access("#oauth2.hasScope('read')")
+					.antMatchers("/oauth/token", "/api/**").access("#oauth2.hasScope('read')")
 					.and()
 				.csrf().disable();
 		}
