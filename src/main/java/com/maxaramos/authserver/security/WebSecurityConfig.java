@@ -41,16 +41,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //		AuthorizationEndpoint
 //		TokenEndpoint
 //		OAuth2AuthenticationProcessingFilter
+//		AuthorizationCodeTokenGranter
 		http
 			.requestMatchers()
 				.antMatchers("/", "/login", "/oauth/authorize", "/oauth/confirm_access", "/oauth/error")
 				.and()
 			.authorizeRequests()
-				.antMatchers("/login", "/oauth/error").permitAll()
+				.antMatchers("/oauth/error").permitAll()
 				.antMatchers("/", "/oauth/authorize", "/oauth/confirm_access").authenticated()
 				.and()
 			.formLogin()
-				.loginPage("/login")
+				.loginPage("/login").permitAll()
 				.and()
 			.csrf().disable();
 	}
